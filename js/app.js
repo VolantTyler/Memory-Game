@@ -1,10 +1,9 @@
-let grid = $('ul.deck');
-
 
 /*
  * Create a list that holds all of your cards
  */
 
+ const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 
 /*
  * Display the cards on the page
@@ -40,8 +39,16 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+ // assign variables
+let grid = $('ul.deck');
+
+
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
     $(this).addClass('open show');
+    //TODO: put this in another function 'showCard()', but 'this' doesn't work
+
  }
 );
+
+
