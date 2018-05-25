@@ -3,10 +3,6 @@
  * Create a list that holds all of your cards
  */
 
- const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-
- let openCards = [""]
-
 
 /*
  * Display the cards on the page
@@ -42,16 +38,30 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+
  // assign variables
+ //TODO: add "fa " to the front of each (must be both class attributes)
+const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+let openCards = []
 let grid = $('ul.deck');
 
 
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
-    $(this).addClass('open show');
-    //TODO: put this in another function 'showCard()', but 'this' doesn't work
-
+    let currentCard = $(this);
+ 
+    if (openCards.length >= 2) {
+      //hide cards w/ class 'open show'
+    } else {
+       currentCard.addClass('open show');
+       openCards.push(1);
+       alert(openCards);
+    }
+//    let cardSymbol = $(this).children().getAttribute('class');
+//    console.log(cardSymbol);
+//    openCards.push(cardSymbol);
  }
 );
+
 
 
