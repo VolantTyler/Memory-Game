@@ -49,20 +49,24 @@ let grid = $('ul.deck');
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
     let currentCard = $(this);
- 
+    let cardSymbol = $(this).children('i')[0].getAttribute('class');
+
     currentCard.addClass('open show');
-    openCards.push(1);
-    alert(openCards);
+    openCards.push(cardSymbol);
+    let anyOpenCard = $('li.open');
+
 
     if (openCards.length === 2) {
         if (openCards[0] === openCards[1]) {
-            alert('works');
             //remove 'open' add 'match
-            $('li.open').addClass('match');
-            $('li.open').removeClass('open');
-
+            anyOpenCard.addClass('match');
+            anyOpenCard.removeClass('open');
+            //erase array
+            openCards = [];
+        } else {
+            anyOpenCard.removeClass('open show');
+            openCards = [];
         }
-        // else, remove 'open show' from <li>, erase openCards
     } else {
         //do nothing?
     }
