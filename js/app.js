@@ -64,8 +64,12 @@ let grid = $('ul.deck');
             //erase array
             openCards = [];
         } else {
+            setTimeout(myTimeout, 1000);
+            //show negative animation before hide
+            function myTimeout() {
             anyOpenCard.removeClass('open show');
             openCards = [];
+            }
         }
     } else {
         //do nothing?
