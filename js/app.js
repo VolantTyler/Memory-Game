@@ -50,12 +50,21 @@ let grid = $('ul.deck');
  grid.on('click', 'li.card', function() {
     let currentCard = $(this);
  
-    if (openCards.length >= 2) {
-      //hide cards w/ class 'open show'
+    currentCard.addClass('open show');
+    openCards.push(1);
+    alert(openCards);
+
+    if (openCards.length === 2) {
+        if (openCards[0] === openCards[1]) {
+            alert('works');
+            //remove 'open' add 'match
+            $('li.open').addClass('match');
+            $('li.open').removeClass('open');
+
+        }
+        // else, remove 'open show' from <li>, erase openCards
     } else {
-       currentCard.addClass('open show');
-       openCards.push(1);
-       alert(openCards);
+        //do nothing?
     }
 //    let cardSymbol = $(this).children().getAttribute('class');
 //    console.log(cardSymbol);
