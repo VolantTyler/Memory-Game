@@ -51,33 +51,34 @@ let grid = $('ul.deck');
     let currentCard = $(this);
     let cardSymbol = $(this).children('i')[0].getAttribute('class');
 
-    currentCard.addClass('open show');
-    openCards.push(cardSymbol);
-    let anyOpenCard = $('li.open');
 
-
-    if (openCards.length === 2) {
-        if (openCards[0] === openCards[1]) {
-            //remove 'open' add 'match
-            anyOpenCard.addClass('match');
-            anyOpenCard.removeClass('open');
-            //erase array
-            openCards = [];
-        } else {
-            setTimeout(myTimeout, 1000);
-            //show negative animation before hide
-            function myTimeout() {
+    if (currentCard.hasClass('open') === false) {
+        currentCard.addClass('open show');
+        openCards.push(cardSymbol);
+        function myTimeout() {
             anyOpenCard.removeClass('open show');
-            openCards = [];
+            openCards = []
+            };
+        let anyOpenCard = $('li.open');
+
+        if (openCards.length === 2) {
+            if (openCards[0] === openCards[1]) {
+                //remove 'open' add 'match
+                anyOpenCard.addClass('match');
+                anyOpenCard.removeClass('open');
+                //erase array
+                openCards = [];
+            } else {
+                setTimeout(myTimeout, 1000);
+                //TODO: show negative animation/color before hide
+
+                }
             }
-        }
-    } else {
-        //do nothing?
+        } else {
+            $('li.open').removeClass('open show');
+            openCards = []    
     }
-//    let cardSymbol = $(this).children().getAttribute('class');
-//    console.log(cardSymbol);
-//    openCards.push(cardSymbol);
- }
+    } 
 );
 
 
