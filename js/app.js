@@ -42,7 +42,8 @@ function shuffle(array) {
  // assign variables
  //TODO: add "fa " to the front of each (must be both class attributes)
 const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-let openCards = []
+let openCards = [];
+let matchedCards = [];
 let grid = $('ul.deck');
 
 
@@ -55,6 +56,7 @@ let grid = $('ul.deck');
     if (currentCard.hasClass('open') === false) {
         currentCard.addClass('open show');
         openCards.push(cardSymbol);
+        matchedCards.push(cardSymbol);
         function myTimeout() {
             anyOpenCard.removeClass('open show');
             openCards = []
@@ -68,10 +70,17 @@ let grid = $('ul.deck');
                 anyOpenCard.removeClass('open');
                 //erase array
                 openCards = [];
+                //test win condition
+                console.log(matchedCards);
+                if (matchedCards.length === 16) {
+                    alert('You Win');
+                }
             } else {
+                //remove last two elements from matched array
+                matchedCards.splice(-2, 2);
+                //wait 1 second before hiding cards
                 setTimeout(myTimeout, 1000);
                 //TODO: show negative animation/color before hide
-
                 }
             }
         } else {
