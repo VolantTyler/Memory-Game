@@ -44,11 +44,23 @@ function shuffle(array) {
 const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 let openCards = [];
 let matchedCards = [];
-let grid = $('ul.deck');
+let grid = $('ul.deck'); //const?
+let movesCount = 0;
 
+function movesPlusOne () {
+    let movesDisplay = $('span.moves');
+    movesCount += 1;
+    movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
+    //TODO: divide movesCount by 2, count each click as move or each pair
+}
+
+//click restart button
+$('.restart').on('click', movesPlusOne);
+//TODO: testing function on restart button, move to card-click
 
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
+    movesPlusOne();
     let currentCard = $(this);
     let cardSymbol = $(this).children('i')[0].getAttribute('class');
 
@@ -73,7 +85,7 @@ let grid = $('ul.deck');
                 //test win condition
                 console.log(matchedCards);
                 if (matchedCards.length === 16) {
-                    alert('You Win');
+                    alert('You Win! Score = '+movesCount+'');
                 }
             } else {
                 //remove last two elements from matched array
