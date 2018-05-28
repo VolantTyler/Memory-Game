@@ -46,6 +46,8 @@ let openCards = [];
 let matchedCards = [];
 let grid = $('ul.deck'); //const?
 let movesCount = 0;
+let currentCard;
+let cardSymbol;
 
 function movesPlusOne () {
     let movesDisplay = $('span.moves');
@@ -54,17 +56,7 @@ function movesPlusOne () {
     //TODO: divide movesCount by 2, count each click as move or each pair
 }
 
-//click restart button
-$('.restart').on('click', movesPlusOne);
-//TODO: testing function on restart button, move to card-click
-
- //flip card on <li> click
- grid.on('click', 'li.card', function() {
-    movesPlusOne();
-    let currentCard = $(this);
-    let cardSymbol = $(this).children('i')[0].getAttribute('class');
-
-
+function flipCard() {
     if (!(currentCard.hasClass('open'))) {
         currentCard.addClass('open show');
         openCards.push(cardSymbol);
@@ -81,22 +73,32 @@ $('.restart').on('click', movesPlusOne);
                 anyOpenCard.addClass('match');
                 anyOpenCard.removeClass('open');
                 //erase array
-                openCards = [];
-                //test win condition
+                openCards = []; 
                 console.log(matchedCards);
-                if (matchedCards.length === 16) {
-                    alert('You Win! Score = '+movesCount+'');
-                }
+              if (matchedCards.length === 16) {
+                alert('You Win! Score = '+movesCount+'');
+              } 
             } else {
-                //wait 1 second before hiding cards
                 setTimeout(myTimeout, 1000);
                 //TODO: show negative animation/color before hide
-                }
+                } 
             }
         } else {
-            $('li.open').removeClass('open show');
+            currentCard.removeClass('open show');
             openCards = []    
     }
+}
+
+//click restart button
+$('.restart').on('click', movesPlusOne);
+//TODO: testing function on restart button, move to card-click
+
+ //flip card on <li> click
+ grid.on('click', 'li.card', function() {
+    currentCard = $(this);
+    cardSymbol = $(this).children('i')[0].getAttribute('class');
+    movesPlusOne();
+    flipCard();
     } 
 );
 
