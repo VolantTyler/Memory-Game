@@ -65,10 +65,9 @@ $('.restart').on('click', movesPlusOne);
     let cardSymbol = $(this).children('i')[0].getAttribute('class');
 
 
-    if (currentCard.hasClass('open') === false) {
+    if (!(currentCard.hasClass('open'))) {
         currentCard.addClass('open show');
         openCards.push(cardSymbol);
-        matchedCards.push(cardSymbol);
         function myTimeout() {
             anyOpenCard.removeClass('open show');
             openCards = []
@@ -77,6 +76,7 @@ $('.restart').on('click', movesPlusOne);
 
         if (openCards.length === 2) {
             if (openCards[0] === openCards[1]) {
+                matchedCards.push.apply(matchedCards, openCards);
                 //remove 'open' add 'match
                 anyOpenCard.addClass('match');
                 anyOpenCard.removeClass('open');
@@ -88,8 +88,6 @@ $('.restart').on('click', movesPlusOne);
                     alert('You Win! Score = '+movesCount+'');
                 }
             } else {
-                //remove last two elements from matched array
-                matchedCards.splice(-2, 2);
                 //wait 1 second before hiding cards
                 setTimeout(myTimeout, 1000);
                 //TODO: show negative animation/color before hide
