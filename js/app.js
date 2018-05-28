@@ -58,6 +58,11 @@ function movesPlusOne () {
     //TODO: divide movesCount by 2, count each click as move or each pair
 }
 
+//remove star on threshold
+function minusStar () {
+    $('ul.stars li:last-child').remove();
+  }
+
 function hideCard() {
   currentCard.removeClass('open show');
   anyOpenCard.removeClass('open show');
@@ -116,6 +121,12 @@ $('.restart').on('click', movesPlusOne);
     cardSymbol = $(this).children('i')[0].getAttribute('class');
     movesPlusOne();
     flipCard();
+    switch (movesCount) {
+        case 17:
+        case 19:
+        case 21:
+        minusStar();
+      }
     } 
 );
 
