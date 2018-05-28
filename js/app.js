@@ -30,18 +30,18 @@ function shuffle(array) {
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one) [X]
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one) []
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one) [x]
  *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one) []
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one) []
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one) [x]
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one) [x]
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one) [X]
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one) []
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one) [x]
  */
 
 
  // assign variables
  //TODO: add "fa " to the front of each (must be both class attributes)
-const allCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 let openCards = [];
 let matchedCards = [];
 let grid = $('ul.deck'); //const?
@@ -50,6 +50,7 @@ let currentCard;
 let cardSymbol;
 let anyOpenCard;
 
+//increment moves counter
 function movesPlusOne () {
     let movesDisplay = $('span.moves');
     movesCount += 1;
@@ -57,36 +58,51 @@ function movesPlusOne () {
     //TODO: divide movesCount by 2, count each click as move or each pair
 }
 
-function myTimeout() {
-    anyOpenCard.removeClass('open show');
-    openCards = []
-    };
+function hideCard() {
+  currentCard.removeClass('open show');
+  anyOpenCard.removeClass('open show');
+  openCards = []
+};
+
+function victory() {
+  alert('You Win! Score = '+movesCount+'');
+}
+
+
+function checkMatch() {
+  if (openCards[0] === openCards[1]) {
+    matchedCards.push.apply(matchedCards, openCards);
+    //remove 'open' add 'match
+    anyOpenCard.addClass('match');
+    anyOpenCard.removeClass('open');
+    //erase array 
+    openCards = []; 
+    if (matchedCards.length === 16) {
+      victory();
+    } 
+  } else {
+    setTimeout(hideCard, 1000);
+    //TODO: show negative animation/color before hide
+  } 
+}
+
+//add card to list of open cards
+function holdCard() {
+    openCards.push(cardSymbol);
+}
 
 function flipCard() {
     if (!(currentCard.hasClass('open'))) {
         currentCard.addClass('open show');
-        openCards.push(cardSymbol);
+        holdCard();
         anyOpenCard = $('li.open');
 
         if (openCards.length === 2) {
-            if (openCards[0] === openCards[1]) {
-                matchedCards.push.apply(matchedCards, openCards);
-                //remove 'open' add 'match
-                anyOpenCard.addClass('match');
-                anyOpenCard.removeClass('open');
-                //erase array
-                openCards = []; 
-              if (matchedCards.length === 16) {
-                alert('You Win! Score = '+movesCount+'');
-              } 
-            } else {
-                setTimeout(myTimeout, 1000);
-                //TODO: show negative animation/color before hide
-                } 
+            checkMatch();
+          //checkMatch contains 'else' statement
             }
         } else {
-            currentCard.removeClass('open show');
-            openCards = []    
+          hideCard();    
     }
 }
 
