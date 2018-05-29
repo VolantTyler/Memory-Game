@@ -51,7 +51,8 @@ let anyOpenCard;
 let movesDisplay;
 let starTotal = 3;
 let totalTime = 10;
-
+let s = 00;
+let m = 00;
 
 
 
@@ -61,6 +62,9 @@ function movesPlusOne () {
     movesCount += 1;
     movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
     //TODO: divide movesCount by 2, count each click as move or each pair
+    if (movesCount === 1) {
+      setInterval(startTimer, 1000);
+  }
 }
 
 //remove star on threshold
@@ -77,7 +81,7 @@ function hideCard() {
 };
 
 function victory() {
-  alert('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+totalTime+'');
+  alert('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'');
 }
 
 
@@ -143,9 +147,18 @@ function newGame() {
   });
 }
 
+//Timer
+function startTimer() {
+	s++;
+    if (s === 60) {
+    	s = 0;
+        m++;
+    }
+    document.getElementById("timer").innerHTML = m+':'+s;
+}
+
 //click restart button
 $('.restart').on('click', newGame);
-//TODO: testing function on restart button, move to card-click
 
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
@@ -157,7 +170,6 @@ $('.restart').on('click', newGame);
     switch (movesCount) {
         case 17:
         case 19:
-        case 21:
         minusStar();
       }
     } 
