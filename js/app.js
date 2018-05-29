@@ -53,6 +53,8 @@ let starTotal = 3;
 let totalTime = 10;
 let s = 00;
 let m = 00;
+let varTimer;
+
 
 
 
@@ -63,15 +65,14 @@ function movesPlusOne () {
     movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
     //TODO: divide movesCount by 2, count each click as move or each pair
     if (movesCount === 1) {
-      setInterval(startTimer, 1000);
-  }
+      varTimer = setInterval(startTimer, 1000);
+    }
 }
 
 //remove star on threshold
 function minusStar () {
     $('ul.stars li:last-child').remove();
     starTotal -= 1;
-    console.log(starTotal);
   }
 
 function hideCard() {
@@ -94,6 +95,7 @@ function checkMatch() {
     //erase array 
     openCards = []; 
     if (matchedCards.length === 16) {
+      clearInterval(varTimer);
       victory();
     } 
   } else {
@@ -137,6 +139,11 @@ function newGame() {
     $('ul.stars').append('<li><i class="fa fa-star"></i></li>')
   }
   starTotal = 3;
+
+  //zero timer
+  clearInterval(varTimer);
+  m, s = 0;
+  document.getElementById("timer").innerHTML = m+':'+s;
 
   shuffle(allCards);
   //for each li.class, add child <i> with class array
