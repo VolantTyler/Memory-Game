@@ -40,7 +40,6 @@ function shuffle(array) {
 
 
  // assign variables
- //TODO: add "fa " to the front of each (must be both class attributes)
 const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 let openCards = [];
 let matchedCards = [];
@@ -111,8 +110,20 @@ function flipCard() {
     }
 }
 
+function newGame() {
+  $('li.card i').remove();
+  shuffle(allCards);
+  //for each li.class, add child <i> with class array
+  let i = 0;
+  $('li.card').each(function(){
+    $(this).append('<i class="'+allCards[i]+'"></i>');
+    i++;
+  })
+  console.log(allCards);
+}
+
 //click restart button
-$('.restart').on('click', movesPlusOne);
+$('.restart').on('click', newGame);
 //TODO: testing function on restart button, move to card-click
 
  //flip card on <li> click
