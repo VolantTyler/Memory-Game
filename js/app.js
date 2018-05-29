@@ -49,6 +49,10 @@ let currentCard;
 let cardSymbol;
 let anyOpenCard;
 let movesDisplay;
+let starTotal = 3;
+let totalTime = 10;
+
+
 
 
 //increment moves counter
@@ -62,6 +66,8 @@ function movesPlusOne () {
 //remove star on threshold
 function minusStar () {
     $('ul.stars li:last-child').remove();
+    starTotal -= 1;
+    console.log(starTotal);
   }
 
 function hideCard() {
@@ -71,7 +77,7 @@ function hideCard() {
 };
 
 function victory() {
-  alert('You Win! Score = '+movesCount+'');
+  alert('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+totalTime+'');
 }
 
 
@@ -115,17 +121,26 @@ function flipCard() {
 function newGame() {
   $('li.card i').remove();
   $('li.card').removeClass('open show match');
+
+    //TODO: remove into separate function
   movesCount = 0;
   movesDisplay = $('span.moves');
   movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
+  
+  //TODO: reset stars to 3 
+  $('ul.stars li').remove();
+  for (let i = 0; i < 3; i++) {
+    $('ul.stars').append('<li><i class="fa fa-star"></i></li>')
+  }
+  starTotal = 3;
+
   shuffle(allCards);
   //for each li.class, add child <i> with class array
   let i = 0;
   $('li.card').each(function(){
     $(this).append('<i class="'+allCards[i]+'"></i>');
     i++;
-  })
-  console.log(allCards);
+  });
 }
 
 //click restart button
@@ -138,6 +153,7 @@ $('.restart').on('click', newGame);
     cardSymbol = $(this).children('i')[0].getAttribute('class');
     movesPlusOne();
     flipCard();
+    //reduce stars at two move counts
     switch (movesCount) {
         case 17:
         case 19:
