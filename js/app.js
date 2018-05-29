@@ -48,10 +48,12 @@ let movesCount = 0;
 let currentCard;
 let cardSymbol;
 let anyOpenCard;
+let movesDisplay;
+
 
 //increment moves counter
 function movesPlusOne () {
-    let movesDisplay = $('span.moves');
+    movesDisplay = $('span.moves');
     movesCount += 1;
     movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
     //TODO: divide movesCount by 2, count each click as move or each pair
@@ -112,6 +114,10 @@ function flipCard() {
 
 function newGame() {
   $('li.card i').remove();
+  $('li.card').removeClass('open show match');
+  movesCount = 0;
+  movesDisplay = $('span.moves');
+  movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
   shuffle(allCards);
   //for each li.class, add child <i> with class array
   let i = 0;
