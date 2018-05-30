@@ -93,10 +93,6 @@ function checkMatch() {
     anyOpenCard.removeClass('open');
     //erase array 
     openCards = []; 
-    if (matchedCards.length === 16) {
-      clearInterval(varTimer);
-      victory();
-    } 
   } else {
     setTimeout(hideCard, 1000);
     //TODO: show negative animation/color before hide
@@ -164,6 +160,14 @@ function startTimer() {
     document.getElementById("timer").innerHTML = m+':'+s;
 }
 
+function winCheck() {
+  if (matchedCards.length === 16) {
+    console.log(matchedCards);
+    clearInterval(varTimer);
+    victory();
+  } 
+}
+
 //click restart button
 $('.restart').on('click', newGame);
 
@@ -173,6 +177,8 @@ $('.restart').on('click', newGame);
     cardSymbol = $(this).children('i')[0].getAttribute('class');
     movesPlusOne();
     flipCard();
+    setTimeout(winCheck, 500); 
+
     //reduce stars at two move counts
     switch (movesCount) {
         case 17:
