@@ -63,7 +63,6 @@ function movesPlusOne () {
     movesDisplay = $('span.moves');
     movesCount += 1;
     movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
-    //TODO: divide movesCount by 2, count each click as move or each pair
     if (movesCount === 1) {
       varTimer = setInterval(startTimer, 1000);
     }
@@ -127,13 +126,13 @@ function flipCard() {
 function newGame() {
   $('li.card i').remove();
   $('li.card').removeClass('open show match');
+  matchedCards = [];
 
     //TODO: remove into separate function
   movesCount = 0;
   movesDisplay = $('span.moves');
   movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
   
-  //TODO: reset stars to 3 
   $('ul.stars li').remove();
   for (let i = 0; i < 3; i++) {
     $('ul.stars').append('<li><i class="fa fa-star"></i></li>')
@@ -142,7 +141,8 @@ function newGame() {
 
   //zero timer
   clearInterval(varTimer);
-  m, s = 0;
+  m = 0;
+  s = 0;
   document.getElementById("timer").innerHTML = m+':'+s;
 
   shuffle(allCards);
