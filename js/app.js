@@ -81,8 +81,10 @@ function hideCard() {
 };
 
 function victory() {
-  alert('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'');
-}
+  if (window.confirm('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'\n\n Do you want to play again?')) {
+    newGame();
+    };
+  }
 
 
 function checkMatch() {
@@ -167,6 +169,9 @@ function winCheck() {
     victory();
   } 
 }
+
+
+//Click behavior
 
 //click restart button
 $('.restart').on('click', newGame);
