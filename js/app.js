@@ -164,6 +164,7 @@ function newGame() {
 }
 
 //Timer
+//parts of funcion learned from W3Schools https://www.w3schools.com/js/js_timing.asp
 function startTimer() {
 	s++;
   if (s === 60) {
