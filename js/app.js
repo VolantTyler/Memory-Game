@@ -43,7 +43,6 @@ function shuffle(array) {
 const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 const grid = $('ul.deck');
 let starTotal = 3;
-let totalTime = 10;
 let s = 00;
 let m = 00;
 let movesCount = 0;
@@ -52,8 +51,7 @@ let matchedCards = [];
 let currentCard, cardSymbol, anyOpenCard, movesDisplay, varTimer;
 
 
-
-
+//Functions
 //increment moves counter
 function movesPlusOne () {
     movesDisplay = $('span.moves');
@@ -64,18 +62,19 @@ function movesPlusOne () {
     }
 }
 
-//remove star on threshold
+//remove star on score threshold
 function minusStar () {
     $('ul.stars li:last-child').remove();
     starTotal -= 1;
   }
 
 function hideCard() {
-  currentCard.removeClass('open show');
-  anyOpenCard.removeClass('open show');
-  openCards = []
-};
+    currentCard.removeClass('open show');
+    anyOpenCard.removeClass('open show');
+    openCards = []
+  };
 
+//victory message
 function victory() {
   if (confirm('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'\n\n Do you want to play again?')) {
     newGame();
@@ -85,15 +84,15 @@ function victory() {
 
 function checkMatch() {
   if (openCards[0] === openCards[1]) {
+    //add open cards to matched cards array
     matchedCards.push.apply(matchedCards, openCards);
-    //remove 'open' add 'match
+    //remove 'open' class add 'match' class
     anyOpenCard.addClass('match');
     anyOpenCard.removeClass('open');
     //erase array 
     openCards = []; 
   } else {
     setTimeout(hideCard, 500);
-    //TODO: show negative animation/color before hide
   } 
 }
 
@@ -103,64 +102,79 @@ function holdCard() {
 }
 
 function flipCard() {
-    if (!(currentCard.hasClass('open'))) {
-        currentCard.addClass('open show');
-        holdCard();
-        anyOpenCard = $('li.open');
+  //if clicked card is hidden, show it
+  if (!(currentCard.hasClass('open'))) {
+    currentCard.addClass('open show');
+    holdCard();
+    anyOpenCard = $('li.open');
 
-        if (openCards.length === 2) {
-            checkMatch();
-          //checkMatch contains 'else' statement
-            }
-        } else {
-          hideCard();    
-    }
+    if (openCards.length === 2) {
+        checkMatch();
+      //checkMatch contains 'else' statement
+        }
+      //if card is open/shown, hide it
+    } else {
+      hideCard();    
+  }
 }
 
-function newGame() {
-  $('li.card i').remove();
-  $('li.card').removeClass('open show match');
-  matchedCards = [];
-
-    //TODO: remove into separate function
+function resetMovesCount() {
   movesCount = 0;
   movesDisplay = $('span.moves');
   movesDisplay.replaceWith('<span class="moves">'+movesCount+'</span>');
-  
+}
+
+function resetStarsCount() {
   $('ul.stars li').remove();
   for (let i = 0; i < 3; i++) {
     $('ul.stars').append('<li><i class="fa fa-star"></i></li>')
   }
   starTotal = 3;
+}
 
-  //zero timer
+function resetTimer() {
   clearInterval(varTimer);
   m = 0;
   s = 0;
   document.getElementById("timer").innerHTML = m+':'+s;
+}
 
-  shuffle(allCards);
-  //for each li.class, add child <i> with class array
+function resetCards() {
   let i = 0;
   $('li.card').each(function(){
     $(this).append('<i class="'+allCards[i]+'"></i>');
     i++;
-  });
+  })
+}
+
+//reset game board
+function newGame() {
+  //remove all symbols
+  $('li.card i').remove();
+  //flip all cards face down
+  $('li.card').removeClass('open show match');
+  matchedCards = [];
+  openCards = [];
+  resetMovesCount();
+  resetStarsCount();
+  resetTimer();
+  shuffle(allCards);
+  //place each card face down in new shuffled order
+  resetCards();
 }
 
 //Timer
 function startTimer() {
 	s++;
-    if (s === 60) {
-    	s = 0;
-        m++;
-    }
-    document.getElementById("timer").innerHTML = m+':'+s;
+  if (s === 60) {
+    s = 0;
+    m++;
+  }
+  document.getElementById("timer").innerHTML = m+':'+s;
 }
 
 function winCheck() {
   if (matchedCards.length === 16) {
-    console.log(matchedCards);
     clearInterval(varTimer);
     victory();
   } 
@@ -168,8 +182,7 @@ function winCheck() {
 
 
 //Click behavior
-
-//click restart button
+//reset game board when click restart button
 $('.restart').on('click', newGame);
 
  //flip card on <li> click
