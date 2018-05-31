@@ -50,10 +50,17 @@ h1 {
     align-items: center;
     margin: 0 0 3em;
 }
-@media screen and (max-width: 375px){
+@media screen and (max-width: 400px){
     .deck {
         width: 320px;
         min-height: 320px;
+        padding: 16px;
+    }
+}
+@media screen and (min-width: 400px) and (max-width: 475px){
+    .deck {
+        width: 400px;
+        min-height: 400px;
         padding: 16px;
     }
 }
@@ -71,10 +78,16 @@ h1 {
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
-@media screen and (max-width: 375px){
+@media screen and (max-width: 400px){
     .deck .card {
         width: 60px;
         height: 60px;
+    }
+}
+@media screen and (min-width: 400px) and (max-width: 475px){
+    .deck .card {
+        width: 75px;
+        height: 75px;
     }
 }
 
