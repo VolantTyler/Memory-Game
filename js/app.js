@@ -81,7 +81,7 @@ function hideCard() {
 };
 
 function victory() {
-  if (window.confirm('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'\n\n Do you want to play again?')) {
+  if (confirm('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'\n\n Do you want to play again?')) {
     newGame();
     };
   }
