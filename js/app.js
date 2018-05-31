@@ -41,19 +41,15 @@ function shuffle(array) {
 
  // assign variables
 const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-let openCards = [];
-let matchedCards = [];
-let grid = $('ul.deck'); //const?
-let movesCount = 0;
-let currentCard;
-let cardSymbol;
-let anyOpenCard;
-let movesDisplay;
+const grid = $('ul.deck');
 let starTotal = 3;
 let totalTime = 10;
 let s = 00;
 let m = 00;
-let varTimer;
+let movesCount = 0;
+let openCards = [];
+let matchedCards = [];
+let currentCard, cardSymbol, anyOpenCard, movesDisplay, varTimer;
 
 
 
@@ -96,7 +92,7 @@ function checkMatch() {
     //erase array 
     openCards = []; 
   } else {
-    setTimeout(hideCard, 1000);
+    setTimeout(hideCard, 500);
     //TODO: show negative animation/color before hide
   } 
 }
