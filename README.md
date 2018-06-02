@@ -23,6 +23,8 @@ Every pair of flipped cards is added to the openCards array. If they match, they
 
 I used several setTimeout's to delay checking for a match or declaring victory until after both cards were flipped.
 
+I built the victory modal using starter code from SweetAlert https://sweetalert.js.org
+
 ## Modifications
 
 I made a few modifications to the starter code.
