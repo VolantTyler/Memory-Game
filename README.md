@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-* [Purpose](#Purpose)
-* [Explanation](#Explanation)
-* [Modifications](#Modifications)
-* [Learning](#Learning)
+* [Purpose](#purpose)
+* [Explanation](#explanation)
+* [Modifications](#modifications)
+* [Learning](#learning)
 
 ## Purpose
 
