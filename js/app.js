@@ -4,8 +4,8 @@
  const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
  const grid = $('ul.deck');
  let starTotal = 3;
- let s = 00;
- let m = 00;
+ let s = 0;
+ let m = 0;
  let movesCount = 0;
  let openCards = [];
  let matchedCards = [];
@@ -48,8 +48,8 @@ function minusStar () {
 function hideCard() {
     currentCard.removeClass('open show');
     anyOpenCard.removeClass('open show');
-    openCards = []
-  };
+    openCards = [];
+  }
 
 function checkMatch() {
   if (openCards[0] === openCards[1]) {
@@ -96,7 +96,7 @@ function resetMovesCount() {
 function resetStarsCount() {
   $('ul.stars li').remove();
   for (let i = 0; i < 3; i++) {
-    $('ul.stars').append('<li><i class="fa fa-star"></i></li>')
+    $('ul.stars').append('<li><i class="fa fa-star"></i></li>');
   }
   starTotal = 3;
 }
@@ -113,7 +113,7 @@ function resetCards() {
   $('li.card').each(function(){
     $(this).append('<i class="'+allCards[i]+'"></i>');
     i++;
-  })
+  });
 }
 
 //reset game board
@@ -163,7 +163,7 @@ function winModal () {
       newGame();
     } else {
       return;
-    };
+    }
 });
 }
 
