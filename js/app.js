@@ -174,6 +174,9 @@ $('.restart').on('click', newGame);
 
  //flip card on <li> click
  grid.on('click', 'li.card', function() {
+  if ($(this).hasClass('show')) {
+    return;
+  } else {
     currentCard = $(this);
     cardSymbol = $(this).children('i')[0].getAttribute('class');
     movesPlusOne();
@@ -187,7 +190,7 @@ $('.restart').on('click', newGame);
         minusStar();
       }
     } 
-);
+ });
 
 
 
