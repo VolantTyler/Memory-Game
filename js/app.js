@@ -74,13 +74,6 @@ function hideCard() {
     openCards = []
   };
 
-//victory message
-function victory() {
-  if (confirm('You Win! Score = '+movesCount+' Stars = '+starTotal+' Time = '+m+':'+s+'\n\n Do you want to play again?')) {
-    newGame();
-    };
-  }
-
 
 function checkMatch() {
   if (openCards[0] === openCards[1]) {
@@ -177,8 +170,25 @@ function startTimer() {
 function winCheck() {
   if (matchedCards.length === 16) {
     clearInterval(varTimer);
-    victory();
+    winModal();
   } 
+}
+
+//Victory message - starter code from https://sweetalert.js.org/guides/ 
+function winModal () {
+  swal({
+    title: 'You win!', 
+    text: 'Score = '+movesCount+' / Stars = '+starTotal+' / Time = '+m+':'+s+'\n\n Do you want to play again?', 
+    icon: "success",
+    buttons: ["I'm done", "Play again"],
+  })
+  .then((playAgain) => {
+    if (playAgain) {
+      newGame();
+    } else {
+      return;
+    };
+});
 }
 
 
