@@ -1,15 +1,18 @@
 
-/*
- * Create a list that holds all of your cards
- */
+
+ // assign variables
+ const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
+ const grid = $('ul.deck');
+ let starTotal = 3;
+ let s = 00;
+ let m = 00;
+ let movesCount = 0;
+ let openCards = [];
+ let matchedCards = [];
+ let currentCard, cardSymbol, anyOpenCard, movesDisplay, varTimer;
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+//Functions
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -26,32 +29,6 @@ function shuffle(array) {
     return array;
 }
 
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one) [X]
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one) [x]
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one) [x]
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one) [x]
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one) [X]
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one) [x]
- */
-
-
- // assign variables
-const allCards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-const grid = $('ul.deck');
-let starTotal = 3;
-let s = 00;
-let m = 00;
-let movesCount = 0;
-let openCards = [];
-let matchedCards = [];
-let currentCard, cardSymbol, anyOpenCard, movesDisplay, varTimer;
-
-
-//Functions
 //increment moves counter
 function movesPlusOne () {
     movesDisplay = $('span.moves');
@@ -73,7 +50,6 @@ function hideCard() {
     anyOpenCard.removeClass('open show');
     openCards = []
   };
-
 
 function checkMatch() {
   if (openCards[0] === openCards[1]) {
